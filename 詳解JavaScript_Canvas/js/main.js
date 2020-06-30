@@ -40,6 +40,23 @@
     
     ctx.fillStyle = g;
     ctx.fillRect(0, 0, canvas.width, canvas.height);//canvas一面に表示
+    
+    //円形グラデーションの設定
+    // const g = ctx.createRadialGradient(
+    //   x0, y0, r0,
+    //   x1, y1, r1
+    // );
+    const g = ctx.createRadialGradient(
+      canvas.width / 2, canvas.height / 2, 50,
+      canvas.width / 2 + 100, canvas.height / 2 + 200, 500
+    );
+
+    g.addColorStop(0, '#f00');
+    g.addColorStop(0.3, '#0f0');
+    g.addColorStop(1, '#00f');
+    
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
   }
 
   draw();
