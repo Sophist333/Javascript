@@ -12,6 +12,10 @@
     'use strict';
 
     var scene;
+    // 複数の物体を組み合わせて、それを一つの物体として操作する
+    var person;　//headとbodyをpersonでまとめて扱う
+    var head;
+    var body;
     var box; // mesh 物体は立方体
     var light;
     var ambient; // 環境光
@@ -36,19 +40,21 @@
     // - scale 拡大縮小
     // - rotation 回転
     
-    box = new THREE.Mesh(
-      new THREE.BoxGeometry(50, 50, 50),　//幅,高さ,奥行き
-      new THREE.MeshLambertMaterial({
-        // ▶ 色の指定方法
-        // color: 0xff0000
-        // color: '#00ff00'
-        // color: 'rgb(122, 32, 48)'
-        // color: 'hsl(100, 30%, 20%)'
-        color: new THREE.Color(0xff0000)
-      })
-    );
-    box.position.set(0, 0, 0); //x,y,z
-    scene.add(box);
+// ▶立方体
+//     box = new THREE.Mesh(
+//       new THREE.BoxGeometry(50, 50, 50),　//幅,高さ,奥行き
+//       new THREE.MeshLambertMaterial({
+//         // ▶ 色の指定方法
+//         // color: 0xff0000
+//         // color: '#00ff00'
+//         // color: 'rgb(122, 32, 48)'
+//         // color: 'hsl(100, 30%, 20%)'
+//         color: new THREE.Color(0xff0000)
+//       })
+//     );
+    
+//     box.position.set(0, 0, 0); //x,y,z
+//     scene.add(box);
     
 //     ▶positionの操作
 //     box.position.x = 50;
@@ -60,6 +66,25 @@
 //     box.rotation.set(70 * Math.PI / 180, 0, 0);
 //     scene.add(box);
 
+// ▶複数の物体
+    head = new THREE.Mesh(
+      new THREE.BoxGeometry(20, 20, 20),
+      new THREE.MeshLambertMaterial({ color: 0xff0000 })
+    );
+    
+    head.position.set(0, 40, 0);
+    // scene.add(head);
+    body = new THREE.Mesh(
+      new THREE.BoxGeometry(40, 60, 40),
+      new THREE.MeshLambertMaterial({ color: 0xff0000 })
+    );
+    body.position.set(0, 0, 0);
+    // scene.add(body);
+    person = new THREE.Group();
+    person.add(head);
+    person.add(body);
+    scene.add(person); //headもbodyも両方扱う
+    
     // light
     light = new THREE.DirectionalLight(0xffffff, 1); //全てに同じように光が当たる（色、光の強さ）
     light.position.set(0, 100, 30);//光の位置の設定
